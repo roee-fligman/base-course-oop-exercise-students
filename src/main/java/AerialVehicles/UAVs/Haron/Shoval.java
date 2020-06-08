@@ -8,7 +8,6 @@ import Missions.*;
 
 public class Shoval extends AerialVehicle
     implements AerialIntelligenceVehicle, AerialBdaVehicle, AerialAttackVehicle {
-  private final int REPAIR_TIME = 150;
   private String sensorType;
   private String cameraType;
   private int numberOfMissiles;
@@ -63,16 +62,11 @@ public class Shoval extends AerialVehicle
   }
 
   @Override
-  public void check() {
-    if (getHoursOfFlightSinceLastRepair() > REPAIR_TIME) {
-      repair();
-    }
-  }
-
-  @Override
   public String collectIntelligence() {
     return (getPilotName()
-        + ": Shoval Collecting Data in "
+        + ": "
+        + getClass().getSimpleName()
+        + " Collecting Data in "
         + ((IntelligenceMission) getMission()).getRegion()
         + " with sensor type: "
         + sensorType);
@@ -81,16 +75,21 @@ public class Shoval extends AerialVehicle
   @Override
   public String preformBda() {
     return (getPilotName()
-        + ": Shoval taking pictures of "
+        + ": "
+        + getClass().getSimpleName()
+        + " taking pictures of "
         + ((BdaMission) getMission()).getObjective()
         + " with: "
-        + cameraType + " camera");
+        + cameraType
+        + " camera");
   }
 
   @Override
   public String attack() {
     return (getPilotName()
-        + ": Shoval Attacking "
+        + ": "
+        + getClass().getSimpleName()
+        + " Attacking "
         + ((AttackMission) getMission()).getTarget()
         + " with: "
         + missileType

@@ -9,7 +9,6 @@ import Missions.Mission;
 import Missions.MissionTypeException;
 
 public class Zik extends AerialVehicle implements AerialIntelligenceVehicle, AerialBdaVehicle {
-  private final int REPAIR_TIME = 100;
   private String sensorType;
   private String cameraType;
 
@@ -42,16 +41,11 @@ public class Zik extends AerialVehicle implements AerialIntelligenceVehicle, Aer
   }
 
   @Override
-  public void check() {
-    if (getHoursOfFlightSinceLastRepair() > REPAIR_TIME) {
-      repair();
-    }
-  }
-
-  @Override
   public String collectIntelligence() {
     return (getPilotName()
-        + ": Zik Collecting Data in "
+        + ": "
+        + getClass().getSimpleName()
+        + " Collecting Data in "
         + ((IntelligenceMission) getMission()).getRegion()
         + " with sensor type: "
         + sensorType);
@@ -60,9 +54,12 @@ public class Zik extends AerialVehicle implements AerialIntelligenceVehicle, Aer
   @Override
   public String preformBda() {
     return (getPilotName()
-        + ": Zik taking pictures of "
+        + ": "
+        + getClass().getSimpleName()
+        + " taking pictures of "
         + ((BdaMission) getMission()).getObjective()
         + " with: "
-        + cameraType + " camera");
+        + cameraType
+        + " camera");
   }
 }

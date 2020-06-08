@@ -8,7 +8,6 @@ import Missions.*;
 
 public class Kochav extends AerialVehicle
     implements AerialIntelligenceVehicle, AerialAttackVehicle, AerialBdaVehicle {
-  private final int REPAIR_TIME = 100;
   private int numberOfMissiles;
   private String missileType;
   private String sensorType;
@@ -63,16 +62,11 @@ public class Kochav extends AerialVehicle
   }
 
   @Override
-  public void check() {
-    if (getHoursOfFlightSinceLastRepair() > REPAIR_TIME) {
-      repair();
-    }
-  }
-
-  @Override
   public String collectIntelligence() {
     return (getPilotName()
-        + ": Kochav Collecting Data in "
+        + ": "
+        + getClass().getSimpleName()
+        + " Collecting Data in "
         + ((IntelligenceMission) getMission()).getRegion()
         + " with sensor type: "
         + sensorType);
@@ -81,7 +75,9 @@ public class Kochav extends AerialVehicle
   @Override
   public String attack() {
     return (getPilotName()
-        + ": Kochav Attacking "
+        + ": "
+        + getClass().getSimpleName()
+        + " Attacking "
         + ((AttackMission) getMission()).getTarget()
         + " with: "
         + missileType
@@ -92,9 +88,12 @@ public class Kochav extends AerialVehicle
   @Override
   public String preformBda() {
     return (getPilotName()
-        + ": Kochav taking pictures of "
+        + ": "
+        + getClass().getSimpleName()
+        + " taking pictures of "
         + ((BdaMission) getMission()).getObjective()
         + " with: "
-        + cameraType + " camera");
+        + cameraType
+        + " camera");
   }
 }

@@ -9,7 +9,6 @@ import Missions.Mission;
 import Missions.MissionTypeException;
 
 public class F15 extends AerialVehicle implements AerialIntelligenceVehicle, AerialAttackVehicle {
-  private final int REPAIR_TIME = 250;
   private int numberOfMissiles;
   private String missileType;
   private String sensorType;
@@ -53,16 +52,11 @@ public class F15 extends AerialVehicle implements AerialIntelligenceVehicle, Aer
   }
 
   @Override
-  public void check() {
-    if (getHoursOfFlightSinceLastRepair() > REPAIR_TIME) {
-      repair();
-    }
-  }
-
-  @Override
   public String collectIntelligence() {
     return (getPilotName()
-        + ": F15 Collecting Data in "
+        + ": "
+        + getClass().getSimpleName()
+        + " Collecting Data in "
         + ((IntelligenceMission) getMission()).getRegion()
         + " with sensor type: "
         + sensorType);
@@ -71,7 +65,9 @@ public class F15 extends AerialVehicle implements AerialIntelligenceVehicle, Aer
   @Override
   public String attack() {
     return (getPilotName()
-        + ": F15 Attacking "
+        + ": "
+        + getClass().getSimpleName()
+        + " Attacking "
         + ((AttackMission) getMission()).getTarget()
         + " with: "
         + missileType

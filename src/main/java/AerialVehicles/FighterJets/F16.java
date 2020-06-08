@@ -9,7 +9,6 @@ import Missions.Mission;
 import Missions.MissionTypeException;
 
 public class F16 extends AerialVehicle implements AerialAttackVehicle, AerialBdaVehicle {
-  private final int REPAIR_TIME = 250;
   private int numberOfMissiles;
   private String missileType;
   private String cameraType;
@@ -53,16 +52,11 @@ public class F16 extends AerialVehicle implements AerialAttackVehicle, AerialBda
   }
 
   @Override
-  public void check() {
-    if (getHoursOfFlightSinceLastRepair() > REPAIR_TIME) {
-      repair();
-    }
-  }
-
-  @Override
   public String attack() {
     return (getPilotName()
-        + ": F16 Attacking "
+        + ": "
+        + getClass().getSimpleName()
+        + " Attacking "
         + ((AttackMission) getMission()).getTarget()
         + " with: "
         + missileType
@@ -73,9 +67,12 @@ public class F16 extends AerialVehicle implements AerialAttackVehicle, AerialBda
   @Override
   public String preformBda() {
     return (getPilotName()
-        + ": F16 taking pictures of "
+        + ": "
+        + getClass().getSimpleName()
+        + " taking pictures of "
         + ((BdaMission) getMission()).getObjective()
         + " with: "
-        + cameraType + " camera");
+        + cameraType
+        + " camera");
   }
 }
